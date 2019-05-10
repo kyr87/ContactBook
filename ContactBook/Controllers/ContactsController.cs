@@ -15,21 +15,15 @@ namespace ContactBook.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         DataHandling data = new DataHandling();
 
-        public ActionResult Search(string searching)
-        {           
-            return View(searching == null ? data.GetContacts() : data.GetContacts().Where(x => x.FirstName.Contains(searching) || x.LastName.Contains(searching) || searching == null).ToList());
-        }
-
         public ActionResult ViewPhones(int id)
         {
             return RedirectToAction("Index", "Telephones");
         }
 
         // GET: Contacts
-        public ActionResult Index()
+        public ActionResult Index(string searching)
         {
-            var list = data.GetContacts();
-            return View(list);
+            return View(searching == null ? data.GetContacts() : data.GetContacts().Where(x => x.FirstName.Contains(searching) || x.LastName.Contains(searching) || searching == null).ToList());
         }
 
         // GET: Contacts/Create

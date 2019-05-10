@@ -1,4 +1,5 @@
-﻿@model IEnumerable<ContactBook.Models.Telephone>
+﻿@using ContactBook.Models
+@model IEnumerable<ContactBook.Models.Telephone>
 
 @{
     ViewBag.Title = "Index";
@@ -7,20 +8,27 @@
 
 <h2>Index</h2>
 
+@using (Html.BeginForm("Index", "Telephones", FormMethod.Get))
+{
+    <p>
+        @Html.TextBox("searching")
+        <button class="btn-outline-success" type="submit">Search</button>
+    </p>
+
+}
+
 @if (Model.Count() == 0)
 {
     <p>
         You have not phone number yet!
     </p>
+
     <p>
         @Html.ActionLink("Add Number", "Create", null, new { @class = "btn btn-primary" })
     </p>
 }
 else
 {
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
     <table class="table">
         <tr>
             <th>
@@ -42,16 +50,19 @@ else
                     @Html.DisplayFor(modelItem => item.PhoneNumber)
                 </td>
                 <td>
-                    @Html.ActionLink("Create", "Create", new { id = item.TelephoneId }, new { @class = "btn btn-primary" }) 
+                    @Html.Partial("_Edit", new ViewDataDictionary (new Telephone()  { TelephoneId=item.TelephoneId, PhoneNumber=item.PhoneNumber, ContactID = item.ContactID } ))
                     @Html.ActionLink("Delete", "Delete", new { id = item.TelephoneId }, new { onclick = $"return confirm('{item.PhoneNumber} will be deleted. Are you sure ?');", @class = "btn btn-danger" })
                 </td>
             </tr>
         }
-        <p>
-            @Html.ActionLink("Add Number", "Create",null ,new { @class = "btn btn-primary" })
-        </p>
+
+
+
 
     </table>
 
+    <div>
+        @Html.ActionLink("Back", "Index", "Contacts", null, new { @class = "btn btn-dark" })
+    </div>
 }
 

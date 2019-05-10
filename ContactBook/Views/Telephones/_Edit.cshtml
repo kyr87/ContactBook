@@ -1,0 +1,51 @@
+﻿@model  ContactBook.Models.Telephone
+
+
+
+<!-- Button trigger modal -->
+
+<button type="button" class="btn btn-success" style="vertical-align: central" data-toggle="modal" data-target="#EditPhone_@Model.TelephoneId">
+    Edit
+</button>
+
+
+<!-- Modal -->
+<div class="modal fade" id="EditPhone_@Model.TelephoneId" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header padding-bottom-20">
+                <h5 class="modal-title" id="editModalLabel"> Edit a Phone </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("Edit", "Telephones", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.TelephoneId)
+                    @Html.HiddenFor(model => model.ContactID)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+

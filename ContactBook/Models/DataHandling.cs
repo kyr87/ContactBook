@@ -32,7 +32,6 @@ namespace ContactBook.Models
             using (var db = new ApplicationDbContext())
             {
                 var DeletingPhones = db.Telephones.Where(i => i.contact.ContactId == deletedUser).ToList();
-
                 db.Telephones.RemoveRange(DeletingPhones);
                 db.Contacts.Remove(db.Contacts.FirstOrDefault(u => u.ContactId == deletedUser));
                 return SaveDbChanges(db);
@@ -53,7 +52,6 @@ namespace ContactBook.Models
             using (var db = new ApplicationDbContext())
             {
                 return db.Telephones
-                    //.Where(t=>t.ContactID == id)
                     .Include(t => t.contact)                   
                     .ToList();
             }
@@ -84,14 +82,7 @@ namespace ContactBook.Models
 
         public bool SaveDbChanges(ApplicationDbContext db)
         {
-            try
-            {
-                return (db.SaveChanges() > 0);
-            }
-            catch (DbException e)
-            {         
-                return false;
-            }
+            return db.SaveChanges() > 0;                      
         }
     }
 }
