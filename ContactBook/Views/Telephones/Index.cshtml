@@ -50,7 +50,7 @@ else
                     @Html.DisplayFor(modelItem => item.PhoneNumber)
                 </td>
                 <td>
-                    @Html.Partial("_Edit", new ViewDataDictionary (new Telephone()  { TelephoneId=item.TelephoneId, PhoneNumber=item.PhoneNumber, ContactID = item.ContactID } ))
+                    @Html.Partial("_Edit", new ViewDataDictionary(new Telephone() { TelephoneId = item.TelephoneId, PhoneNumber = item.PhoneNumber, ContactID = item.ContactID }))
                     @Html.ActionLink("Delete", "Delete", new { id = item.TelephoneId }, new { onclick = $"return confirm('{item.PhoneNumber} will be deleted. Are you sure ?');", @class = "btn btn-danger" })
                 </td>
             </tr>
@@ -66,3 +66,11 @@ else
     </div>
 }
 
+@if (TempData["Message"] != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert('@TempData["Message"]');
+        };
+    </script>
+}

@@ -80,6 +80,14 @@ namespace ContactBook.Models
             }
         }
 
+        public bool EmailExists(string mail)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                return db.Contacts.Any(u => u.Email == mail);
+            }
+        }
+
         public bool SaveDbChanges(ApplicationDbContext db)
         {
             return db.SaveChanges() > 0;                      

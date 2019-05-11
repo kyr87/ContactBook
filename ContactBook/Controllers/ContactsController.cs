@@ -23,7 +23,7 @@ namespace ContactBook.Controllers
         // GET: Contacts
         public ActionResult Index(string searching)
         {
-            return View(searching == null ? data.GetContacts() : data.GetContacts().Where(x => x.FirstName.Contains(searching) || x.LastName.Contains(searching) || searching == null).ToList());
+            return View(searching == null ? data.GetContacts() : data.GetContacts().Where(x => x.FirstName.Contains(searching) || x.LastName.Contains(searching)).ToList());
         }
 
         // GET: Contacts/Create
@@ -39,6 +39,14 @@ namespace ContactBook.Controllers
         {
             if (ModelState.IsValid)
             {
+                bool checkMail = data.EmailExists(contact.Email);
+
+                if (checkMail)
+                {
+                    ModelState.AddModelError(string.Empty, "Email already exists.");
+                    return View(contact);
+                }
+
                 data.CreateContact(contact);
                 return RedirectToAction("Index");
             }

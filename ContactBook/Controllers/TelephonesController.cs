@@ -18,7 +18,7 @@ namespace ContactBook.Controllers
         // GET: Telephones for each Contact
         public ActionResult Index(string searching)
         {
-            return View(searching == null ? data.GetPhones() : data.GetPhones().Where(x => x.contact.FirstName.Contains(searching) || x.contact.LastName.Contains(searching) || searching == null).ToList());
+            return View(searching == null ? data.GetPhones() : data.GetPhones().Where(x => x.contact.FirstName.Contains(searching) || x.contact.LastName.Contains(searching)).ToList());
         }
 
         // POST: Telephones/Create
@@ -33,24 +33,9 @@ namespace ContactBook.Controllers
                 data.CreatePhone(telephone);
                 return RedirectToAction("Index");
             }
-
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest); 
+            TempData["ErrorMessage"] = "Phone number is not valid";
+            return RedirectToAction("Index", "Contacts");
         }
-
-        //// GET: Telephones/Edit/5
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Telephone telephone = db.Telephones.Find(id);
-        //    if (telephone == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(telephone);
-        //}
 
         // POST: Telephones/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -65,7 +50,8 @@ namespace ContactBook.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(telephone);
+            TempData["Message"] = "Phone number is not valid";
+            return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int id)
