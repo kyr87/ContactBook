@@ -35,6 +35,12 @@ else
                 @Html.DisplayNameFor(model => model.contact.FirstName)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.contact.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.contact.Email)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.PhoneNumber)
             </th>
             <th></th>
@@ -42,18 +48,24 @@ else
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.contact.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNumber)
-                </td>
-                <td>
-                    @Html.Partial("_Edit", new ViewDataDictionary(new Telephone() { TelephoneId = item.TelephoneId, PhoneNumber = item.PhoneNumber, ContactID = item.ContactID }))
-                    @Html.ActionLink("Delete", "Delete", new { id = item.TelephoneId }, new { onclick = $"return confirm('{item.PhoneNumber} will be deleted. Are you sure ?');", @class = "btn btn-danger" })
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.contact.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.contact.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.contact.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.Partial("_Edit", new ViewDataDictionary(new Telephone() { TelephoneId = item.TelephoneId, PhoneNumber = item.PhoneNumber, ContactID = item.ContactID }))
+                @Html.ActionLink("Delete", "Delete", new { id = item.TelephoneId }, new { onclick = $"return confirm('{item.PhoneNumber} will be deleted. Are you sure ?');", @class = "btn btn-danger" })
+            </td>
+        </tr>
         }
 
 

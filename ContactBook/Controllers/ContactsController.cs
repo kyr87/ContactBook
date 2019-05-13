@@ -15,11 +15,6 @@ namespace ContactBook.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         DataHandling data = new DataHandling();
 
-        public ActionResult ViewPhones(int id)
-        {
-            return RedirectToAction("Index", "Telephones");
-        }
-
         // GET: Contacts
         public ActionResult Index(string searching)
         {

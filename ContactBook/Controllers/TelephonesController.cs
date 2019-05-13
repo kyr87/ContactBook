@@ -22,8 +22,7 @@ namespace ContactBook.Controllers
         }
 
         // POST: Telephones/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, please enable the specific properties you want to bind 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Telephone telephone)
@@ -38,8 +37,7 @@ namespace ContactBook.Controllers
         }
 
         // POST: Telephones/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, please enable the specific properties you want to bind 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Telephone telephone)
