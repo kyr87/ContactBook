@@ -8,5 +8,5 @@ Contatc Book is a simple and practical contact keeper for your everyday organiza
 * ASP.NET MVC
 * C# 6.0+
 * MS SQL Server 2017 Express
-* Bootsrap 4.3.1
+* Bootstrap 4.3.1
 
